@@ -1,1 +1,132 @@
-.explosion {}
+.explosion {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width 100vw;
+  height: 100vh;
+  background: white;
+  min-width: 1023px;
+  min-height: 600px;
+  z-index: 999;
+  color: black;
+  opacity: 0;
+  &_Opened {
+    display: block;
+  }
+  &_Opening {
+    display: block;
+    .explosionImage {
+      transition: none;
+    }
+  }
+  &Image {
+    position: absolute;
+    width: 500px;
+    display: block;
+    z-index: 2;
+    height: auto;
+    transform: translate3d(0,0,0) scale(1);
+    transform-origin: 50% 50%;
+    backface-visibility: hidden;
+    transition:transform 0.7s, opacity 0.7s;
+  }
+  &Controls {
+    display: flex;
+    flex-direction: column;
+    width: 3rem;
+    top: 0;
+    position: absolute;
+    z-index: 7;
+    justify-content: center;
+    right: 22%
+    margin-top: 3000px;
+    height: 400px;
+    transition: margin 0.7s;
+  }
+  &Summary {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    background: #2d5051;
+    transition: width 0.7s;
+    color: #fff;
+    width: 50%;
+    overflow: hidden;
+    &Content {
+      padding 0.5rem 5rem;
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+  }
+  &Title {
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  &Description {
+    color: #daa35b;
+  }
+  &Close {
+    position: absolute;
+    top: 0;
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%
+    background-color: transparent;
+    background-image: url("../../explosion/images/close.svg");
+    cursor: pointer;
+  }
+  &Navs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &Nav{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 3px solid black;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 80%
+    background-position: center;
+    cursor: pointer;
+    text-align: center;
+    opacity: 1;
+    transition: background 0.3s, opacity 0.3s;
+
+    &:hover {
+      background-color: black;
+    }
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.3s;
+    }
+
+    &Prev{
+      background-image: url("../../explosion/images/arrow-up.svg");
+
+      &:hover {
+        background-image: url("../../explosion/images/arrow-up-white.svg");
+      }
+    }
+    &Next{
+      background-image: url("../../explosion/images/arrow-down.svg");
+      &:hover {
+        background-image: url("../../explosion/images/arrow-down-white.svg");
+      }
+    }
+  }
+  &Counter {
+    font-weight: bold;
+    font-size: 1.2ram;
+    padding: 1rem 0;
+  }
+
+}

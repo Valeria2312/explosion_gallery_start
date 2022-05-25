@@ -14,13 +14,12 @@ html(lang="ru")
             .gallery
                 each image in images
                     .galleryItem
-                        .card
-                            a.cardLink(href=image.src target="_blank" data-title=image.title data-description=image.description)
-                                .cardContent
-                                    h3.cardTitle=image.title
-                                    p.cardDescription=image.description
-                                .cardHover
-                                img.cardImage(src=image.src alt=image.title)
+                        a.card(href=image.src target="_blank" data-title=image.title data-description=image.description)
+                            .cardContent
+                                h3.cardTitle=image.title
+                                p.cardDescription=image.description
+                            .cardHover
+                            img.cardImage(src=image.src alt=image.title)
         script(src="/js/index.js")
 
 
