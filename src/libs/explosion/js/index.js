@@ -21,7 +21,7 @@ const explosionNavsClassName = 'explosionNavs';
 const explosionNavClassName = 'explosionNav'; 
 const explosionNavPrevClassName = 'explosionNavPrev';
 const explosionNavNextClassName = 'explosionNavNext';
-const explosionCouterClassName = 'explosionCounter';
+const explosionCounterClassName = 'explosionCounter';
 
 class ExplositionGallery {
     constructor(elementNode, options) {
@@ -33,7 +33,6 @@ class ExplositionGallery {
         this.linkNodes = elementNode.querySelectorAll(this.options.linkClass);
         this.minWidth = 1023;
         this.minHeight = 600;
-        this.padding = 2 * 16;
         this.showingCount = 4;
         this.currentIndex = 0;
         this.size = this.linkNodes.length;
@@ -54,7 +53,7 @@ class ExplositionGallery {
             <button class="${explosionCloseClassName}"></button>
             <div class = "${explosionNavsClassName}"> 
                 <button class="${explosionNavClassName} ${explosionNavPrevClassName}"></button>
-                <div class = "${explosionCouterClassName}"> 1/${this.size}</div>
+                <div class = "${explosionCounterClassName}"> 1/${this.size}</div>
                 <button class="${explosionNavClassName} ${explosionNavNextClassName}"></button>
             </div>
         </div>
@@ -64,7 +63,7 @@ class ExplositionGallery {
         alt = "${linkNode.dataset.title}"
         class = "${explosionImageClassName}"
         data-title = "${linkNode.dataset.title}"
-        data-discription="${linkNode.dataset.description}"
+        data-description="${linkNode.dataset.description}"
         />
         `).join('')}
         </div>`;
@@ -74,7 +73,7 @@ class ExplositionGallery {
         this.explosionControlNodes = this.modalContainerNode.querySelector(`.${explosionControlsClassName}`);
         this.explosionNavPrevlNode = this.modalContainerNode.querySelector(`.${explosionNavPrevClassName}`);
         this.explosionNavNextlNode = this.modalContainerNode.querySelector(`.${explosionNavNextClassName}`);
-        this.explosionCounterlNode = this.modalContainerNode.querySelector(`.${explosionCouterClassName}`);
+        this.explosionCounterlNode = this.modalContainerNode.querySelector(`.${explosionCounterClassName}`);
         this.explosionTitleNode = this.modalContainerNode.querySelector(`.${explosionTitleClassName}`);
         this.explosionDescriptionNode = this.modalContainerNode.querySelector(`.${explosionDescriptionClassName}`);
         this.explosionSummaryNode = this.modalContainerNode.querySelector(`.${explosionSummaryClassName}`);
@@ -102,10 +101,10 @@ class ExplositionGallery {
             this.setGalleryStyles();
         }
     }
-    closeGallery = (event) => {
+    closeGallery = () => {
         this.setInitPositionToImages();
         this.explosionImageNodes.forEach((imageNode) => {
-            imageNode.style.opacity = 1;
+            imageNode.style.opacity = '1';
         });
         this.explosionSummaryNode.style.width = '0';
         this.explosionControlNodes.style.marginTop = '3000px';
@@ -125,7 +124,7 @@ class ExplositionGallery {
         if(buttonNode.classList.contains(explosionNavNextClassName) && this.currentIndex < this.size - 1) {
             this.currentIndex += 1;
         }
-        this.shitchChanges(true);
+        this.switchChanges(true);
 
     }
     activateGallery = (event)  => {
@@ -145,12 +144,12 @@ class ExplositionGallery {
         fadeIn(this.modalContainerNode, () => {
             this.modalContainerNode.classList.remove(explosionOpeningClassName);
             this.modalContainerNode.classList.add(explosionOpenedClassName);
-            this.shitchChanges();
+            this.switchChanges();
         });
         this.setInitSizesToImages();
         this.setInitPositionToImages();
     }
-    shitchChanges(hasSummaryAnimation) {
+    switchChanges(hasSummaryAnimation) {
     //    Установть фотографии на места в карусели
         this.setCurrentState();
     //    Установить состояния контролов
@@ -163,15 +162,15 @@ class ExplositionGallery {
     changeSummary(hasAnimation) {
         const content = this.explosionImageNodes[this.currentIndex].dataset;
         if(hasAnimation) {
-            this.explosionSummaryContentNode.style.opacity = 0;
+            this.explosionSummaryContentNode.style.opacity = '0';
             setTimeout(() => {
                 this.explosionTitleNode.innerText = content.title;
-                this.explosionDescriptionNode.innerText = content.discription;
-                this.explosionSummaryContentNode.style.opacity = 1;
+                this.explosionDescriptionNode.innerText = content.description;
+                this.explosionSummaryContentNode.style.opacity = '1';
             }, 300)
         } else {
              this.explosionTitleNode.innerText = content.title;
-             this.explosionDescriptionNode.innerText = content.discription;
+             this.explosionDescriptionNode.innerText = content.description;
         }
     }
     changeCounter() {
